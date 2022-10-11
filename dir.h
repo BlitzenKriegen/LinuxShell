@@ -14,3 +14,5 @@
   arguements made by the user to to program, which would then
   process them.
  */
+
+#include <stdio.h>
