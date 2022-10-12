@@ -1,5 +1,3 @@
-OBJ = dir.o
-
 sh: dir.o shell.o file.o
 	gcc -g dir.o -o dir
 	gcc -g shell.o -o sh
