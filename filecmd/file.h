@@ -17,7 +17,8 @@
 #include <fcntl.h>
 
 #define BUFFER 256
-#define INSUFFICIENT_ERR 35
+#define INSUFFICIENT_ERR 26
+#define FEW_ARG "Error: Too Few Arguements\n"
 struct stat st;
 
 int catFunction(char *argv[]);

@@ -14,5 +14,12 @@
   arguements made by the user to to program, which would then
   process them.
  */
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-#include <stdio.h>
+#define BUFFER 256
+#define INSUFFICIENT_ERR 26
+
+int mkdirFunction(char *[]);

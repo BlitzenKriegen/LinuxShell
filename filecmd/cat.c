@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[]){
   if(argc < 2){
-    write(2, "Error: Command not properly called\n",INSUFFICIENT_ERR);
+    write(2, FEW_ARG,INSUFFICIENT_ERR);
   }
   else{
     catFunction(argv);
