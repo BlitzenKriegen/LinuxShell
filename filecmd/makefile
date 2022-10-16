@@ -1,18 +1,22 @@
+GCC = gcc -g -c
+FIN = gcc -g
+ERASE = rm -f *.o *~
+
 file: mv.o rm.o cat.o cp.o
-	gcc -g cat.o -o cat
-	gcc -g cp.o -o cp
-	gcc -g rm.o -o rm
-	gcc -g mv.o -o mv
-	rm -f *.o *~
+	$(FIN) cat.o -o cat
+	$(FIN) cp.o -o cp
+	$(FIN) rm.o -o rm
+	$(FIN) mv.o -o mv
+	$(ERASE)
 
 cat.o: cat.c file.h
-	gcc -g -c cat.c
+	$(GCC) cat.c
 
 cp.o: cp.c file.h
-	gcc -g -c cp.c
+	$(GCC) cp.c
 
 rm.o: rm.c file.h
-	gcc -g -c rm.c
+	$(GCC) rm.c
 
 mv.o: mv.c file.h
-	gcc -g -c mv.c
+	$(GCC) mv.c
