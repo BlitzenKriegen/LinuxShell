@@ -5,12 +5,12 @@ int main(int argc, char *argv[]){
     write(2, ARG_ERR,INSUFFICIENT_ERR);
   }
   else{
-    mkdirFunction(argv);
+    cdFunction(argv);
   }
   return 0;
 }
 
-int mkdirFunction(char *argv[]){
-  mkdir(argv[1], S_IRUSR|S_IWUSR|S_IXUSR);
+int cdFunction(char *argv[]){
+  chdir("..");
   return 0;
 }

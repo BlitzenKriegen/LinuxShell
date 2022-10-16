@@ -18,8 +18,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <dirent.h>
 
 #define BUFFER 256
 #define INSUFFICIENT_ERR 26
+#define ARG_ERR "Error: Too Few Arguements\n"
 
 int mkdirFunction(char *[]);
+int rmdirFunction(char *[]);
+int lsFunction(char []);
+int cdFunction(char *[]);
+int pwdFunction(char *[]);
+int sizeStr(char []);
