@@ -3,7 +3,7 @@
 #define USERLENGTH 31
 #define CLLENGTH 256
 
-int main(){
+int main(int argc, char *argv[]){
 
   char userName[USERLENGTH];
   char userPass[USERLENGTH];
@@ -19,17 +19,22 @@ int main(){
   /* will need to have error check eventually */
   write(1, "Successfully logged in, Welcome!\n", 33);
 
+  int bytesRead;
+  
   char commandLineInput[CLLENGTH];
-  read(0, commandLineInput, CLLENGTH);
-  
-  
+  bytesRead = read(0, commandLineInput, CLLENGTH);
+  commandLineInput[bytesRead - 1] = '\0';
+
+  /* this still doesn't work :( */
   while (commandLineInput != "exit")
-  {
-    /* processes command line */
-
-
-    read(0, commandLineInput, CLLENGTH);
-  }
+    {
+      /* processes command line */
+      printf("currInput:%s", commandLineInput);
+      printf("bytesRead: %i", bytesRead);
+    
+      bytesRead = read(0, commandLineInput, (sizeof(commandLineInput)) -1);
+      commandLineInput[bytesRead - 1] = '\0';
+    }
   
   return 0;
 }
