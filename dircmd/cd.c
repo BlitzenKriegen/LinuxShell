@@ -11,6 +11,7 @@ int main(int argc, char *argv[]){
 }
 
 int cdFunction(char *argv[]){
-  chdir("..");
+  if(chdir(argv[1]) != 0)
+    write(2, "Directory error\n",16);
   return 0;
 }
