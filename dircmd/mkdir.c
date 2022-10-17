@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
 }
 
 int mkdirFunction(char *argv[]){
-  if((mkdir(argv[1], S_IRUSR|S_IWUSR|S_IXUSR) == ERR_VAL)
+  if((mkdir(argv[1], S_IRUSR|S_IWUSR|S_IXUSR)) == ERR_VAL)
      write(2, "mkdir() error\n",14);
   return 0;
 }
