@@ -22,7 +22,7 @@ int cpFunction(char *argv[]){
     write(2, "Error in Opening Read File\n",27);
   else{
     if (read(fileSrc, data, size) == ERR_VAL)
-      write(2, "Error in Reading File\n,19);
+      write(2, "Error in Reading File\n",19);
     close(fileSrc);
 
     int fileDst = open(argv[2],O_CREAT|O_RDWR);
