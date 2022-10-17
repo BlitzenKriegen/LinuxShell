@@ -16,12 +16,16 @@ int catFunction(char *argv[]){
 
   char data[size];
   int filedesc = open(argv[1],O_RDONLY);
+  
+  if(filedesc == ERR_VAL)
+    write(2, "Error opening file\n",19);
 
-  read(filedesc, data, size);
+  else{
+    read(filedesc, data, size);
 
-  close(filedesc);
-  write(1, data, size);
-  write (1, "\n",1);
-
+    close(filedesc);
+    write(1, data, size);
+    write (1, "\n",1);
+  }
   return 0;
 }
