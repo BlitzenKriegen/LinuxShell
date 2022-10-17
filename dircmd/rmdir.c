@@ -1,5 +1,7 @@
 #include "dir.h"
 
+#define ERR_VAL -1
+
 int main(int argc, char *argv[]){
   if(argc < 2){
     write(2, ARG_ERR,INSUFFICIENT_ERR);
@@ -11,6 +13,7 @@ int main(int argc, char *argv[]){
 }
 
 int rmdirFunction(char *argv[]){
-  rmdir(argv[1]);
+  if(rmdir(argv[1]) == ERR_VAL)
+     write(2, "Remove directory syscall error\n", 31);
   return 0;
 }
