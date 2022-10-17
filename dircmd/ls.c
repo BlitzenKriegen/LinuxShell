@@ -15,10 +15,14 @@ int lsFunction(char dirPath[]){
   struct dirent *entry;
   int sLen;
   
-  while((entry = readdir(ptDir)) != NULL){
-    sLen = sizeStr(entry->d_name);
-    write(1,entry->d_name,sLen);
-    write(1,"\n",1);
+  if((ptDir = opendir("/")) == NULL)
+    write(2, "Directory open error\n",21);
+  else{
+    while((entry = readdir(ptDir)) != NULL){
+      sLen = sizeStr(entry->d_name);
+      write(1,entry->d_name,sLen);
+      write(1,"\n",1);
+    }
   }
   return 0;
 }
