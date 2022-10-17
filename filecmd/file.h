@@ -18,6 +18,7 @@
 
 #define BUFFER 256
 #define INSUFFICIENT_ERR 26
+#define ERR_VAL -1 /*This is for "bad" returns on system calls.*/
 #define FEW_ARG "Error: Too Few Arguements\n"
 struct stat st;
 
