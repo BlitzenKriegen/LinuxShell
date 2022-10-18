@@ -4,9 +4,10 @@
 #include <fcntl.h>
 #include <dirent.h>
 
-int binEx(char *[]);
-int dirEx(char *[]);
-int fileEx(char *[]);
+#define MAX_LINE 256
+#define ERR_VAL -1
+
+int execFunc(char *[], int);
 
 /*
   NOTE: THIS FUNCTION IS TAKEN DIRECTLY FROM
@@ -29,15 +30,5 @@ int fileEx(char *[]);
  */
 int cmp(const char *, const char *);
 
-void catFunc(char *);
-void lsFunc();
-void mkdirFunc(char *);
-void rmdirFunc(char *);
-void pwdFunc();
-void cpFunc(char*[]);
-void rmFunc(char*);
-void mvFunc(char *[]);
-void openEmacs(char *);
-
 const int sizeStr(char []);
-char* strConcat(char*,const char*);
+int strConcat(char*,char*,char*);

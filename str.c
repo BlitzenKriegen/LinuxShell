@@ -1,13 +1,26 @@
 #include "exec.h"
 
-char* strConcat(char *dest, const char *src){
-    char *rdest = dest;
+#define TERM '\0'
 
-    while (*dest)
-      dest++;
-    while (*dest++ = *src++)
-      ;
-    return rdest;
+int strConcat(char *s, char *s1, char *d){
+    int i = 0;
+    int j = 0;
+
+    if(sizeStr(s) + sizeStr(s1) > MAX_LINE){
+      return ERR_VAL;
+    }
+    else{
+      while (s[i] != TERM){
+        d[i] = s[i];
+        i += 1;
+      }
+      while (s1[j] != TERM){
+        d[i + j] = s1[j];
+        j += 1;
+      }
+      d[i+j] = TERM;
+    }
+    return 0;
 }
 
 int cmp (const char *p1, const char *p2)

@@ -1,116 +1,39 @@
 #include "exec.h"
 #include "str.c"
 
+#define ARG_1 1 /*First input of the user*/
+
 int main(int argc, char *argv[]){
-  binEx(argv);
-  return 0;
-}
-
-int binEx(char *argv[]){
-  if(dirEx(argv) == -1)
-    if((fileEx(argv) == -1)){
-      write(2,"Command Not Found\n",18);
-      return -1;
-    }
+  if(execFunc(argv,argc) == ERR_VAL)
+    return ERR_VAL;
 
   return 0;
 }
 
-int fileEx(char *argv[]){
-  char * cmd = argv[1];
-  if (cmp(cmd,"cat") == 0)
-    catFunc(argv[2]);
-  else if(cmp(cmd,"cp") == 0)
-    cpFunc(argv);
-  else if(cmp(cmd,"mv") == 0)
-    mvFunc(argv);
-  else if(cmp(cmd,"rm") == 0)
-    rmFunc(argv[2]);
-  else if(cmp(cmd,"emacs") == 0)
-    openEmacs(argv[2]);
-  else{
-    return -1;
-  }
-  return 0;
-}
-
-void openEmacs(char *fileName){
-  char * const binLk = "/bin/emacs";
-  char * const arg[] = {binLk,fileName,NULL};
-  execve(binLk,arg,NULL);
-  return;
-}
-
-int dirEx(char *argv[]){
-  char * cmd = argv[1];
-  if (cmp(cmd,"ls") == 0)
-    lsFunc();
-  else if (cmp(cmd,"pwd") == 0)
-    pwdFunc();
-  else if (cmp(cmd,"mkdir") == 0)
-    mkdirFunc(argv[2]);
-  else if (cmp(cmd,"rmdir") == 0)
-    rmdirFunc(argv[2]);
-  else{
-    return -1;
-  }
-  return 0;
-}
-
-void mvFunc(char *argv[]){
-  char * const binLk = "/bin/mv";
-  char * srcDst[] = {binLk,argv[2],argv[3],NULL};
-  char * const arg[] = {binLk,*srcDst,NULL};
-  execv(binLk,srcDst);
-  return;
-}
-
-void rmFunc(char *fileName){
-  char * const binLk = "/bin/rm";
-  char * const arg[] = {binLk,fileName,NULL};
-  execve(binLk,arg,NULL);
-  return;
-}
-
-void cpFunc(char *argv[]){
-  char * const binLk = "/bin/cp";
-  char * srcDst[] = {binLk,argv[2],argv[3],NULL};
-  char * const arg[] = {binLk,*srcDst,NULL};
-  execv(binLk,srcDst);
-  return;
-}
-
-void rmdirFunc(char *dirName){
-  char * const binLk = "/bin/rmdir";
-  char * const arg[] = {binLk,dirName,NULL};
-  execve(binLk,arg,NULL);
-  return;
-}
-
-void mkdirFunc(char *dirName){
-  char * const binLk = "/bin/mkdir";
-  char * const arg[] = {binLk,dirName,NULL};
-  execve(binLk,arg,NULL);
-  return;
-}
-
-void catFunc(char *fileName){
-  char * const binLk = "/bin/cat";
-  char * const arg[] = {binLk, fileName, NULL};
-  execve(binLk, arg, NULL);
-  return;
-}
+int execFunc(char *argv[], int argc){
+  char *bincmd = "/bin/";
+  char binLk[MAX_LINE];
+  char *usrArg[argc];
   
-void pwdFunc(){
-  char * const binLk = "/bin/pwd";
-  char * const arg[] = {binLk, NULL};
-  execve(binLk, arg, NULL);
-  return;
-}
+  if(strConcat(bincmd, argv[ARG_1], binLk) == ERR_VAL){
+    write(2,"Error: Input too large!\n",24);
+    return ERR_VAL;
+  }
 
-void lsFunc(){
-  char * const binLk = "/bin/ls";
-  char * const arg[] = {binLk, NULL};
-  execve(binLk, arg, NULL);
-  return;
+  if(argc > 2){
+    usrArg[0] = binLk;
+    for(int i = 2; i < argc; i++){
+      usrArg[i-1] = argv[i];
+      if(i+1 == argc){
+	usrArg[i+1] = NULL;
+      }
+    }
+  }
+  char * const arg2[] = {NULL};
+
+  if(execve(binLk, usrArg, arg2) == ERR_VAL){
+    write(2,"Error: Command not Found!\n",26);
+    return ERR_VAL;
+  }
+  return 0;
 }
