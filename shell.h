@@ -1,3 +1,5 @@
+#ifndef SHELL_H
+#define SHELL_H
 /*
   Names: Kiril S.
          Enrik R
@@ -14,3 +16,5 @@
   Details: The module awaits user input and the processes their input.
   (FINISH LATER).
  */
+
+#endif
